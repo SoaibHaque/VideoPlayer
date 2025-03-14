@@ -13,6 +13,7 @@ export interface PlayerContextProps {
   src: string | { src: string; type?: string; quality?: number }[];
   isPlaying: boolean;
   isMouseActive: boolean;
+  isEnded: boolean;
   setIsMouseActive: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -23,5 +24,6 @@ export const PlayerContext = createContext<PlayerContextProps>({
   play: () => null,
   isPlaying: false,
   isMouseActive: false,
+  isEnded: false,
   setIsMouseActive: () => {},
 });

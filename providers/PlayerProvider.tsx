@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { PlayerContext, PlayerContextProps } from "@context/PlayerContext.ts";
 
 export default function PlayerProvider({
@@ -10,7 +10,8 @@ export default function PlayerProvider({
 }) {
   const ref = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [isMouseActive, setIsMouseActive] = useState<boolean>(false);
+  const [isMouseActive, setIsMouseActive] = useState<boolean>(true);
+  const [isEnded, setIsEnded] = useState<boolean>(false);
 
   function play() {
     if (!ref.current) return;
@@ -18,6 +19,7 @@ export default function PlayerProvider({
       .play()
       .then(() => {
         setIsPlaying(true);
+        setIsEnded(false);
       })
       .catch((err) => console.log(err));
   }
@@ -36,14 +38,33 @@ export default function PlayerProvider({
     if (isPlaying) setIsMouseActive(false);
   }
 
+  function handleOnVideoEnded() {
+    setIsEnded(true);
+    setIsPlaying(false);
+  }
+
+  useEffect(() => {
+    const video = ref?.current;
+    if (video) {
+      video.addEventListener("ended", handleOnVideoEnded);
+    }
+
+    return () => {
+      if (video) {
+        video.removeEventListener("ended", handleOnVideoEnded);
+      }
+    };
+  }, [ref]);
+
   return (
     <PlayerContext
       value={{
         ref,
+        src,
         play,
         pause,
-        src,
         isPlaying,
+        isEnded,
         isMouseActive,
         setIsMouseActive,
       }}

@@ -7,7 +7,7 @@ export default function PlayerTop() {
   return (
     <div
       className={cn(
-        "h-1/10 w-full bg-gradient-to-b z-20 from-black/20 to-black/0 absolute top-0",
+        "h-1/10 flex flex-col justify-start w-full bg-gradient-to-b z-20 from-black/10 to-black/0 absolute top-0",
         {
           "animate-fade-out": !isMouseActive,
           "animate-fade-in": isMouseActive,

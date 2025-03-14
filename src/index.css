@@ -18,11 +18,14 @@
     }
 }
 
-
 .animate-fade-out {
     animation: fadeOut .5s forwards;
 }
 
 .animate-fade-in {
     animation: fadeIn .5s forwards;
+}
+
+.seek-bar-container {
+    --seek-fill: 0;
 }
