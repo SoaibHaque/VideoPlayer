@@ -3,14 +3,14 @@ import { Pause, Play, RotateCcw, SkipBack, SkipForward } from "lucide-react";
 import { PlayerContext } from "@context/PlayerContext.ts";
 import { cn } from "@utils/cn.ts";
 
+function getPlayOption(isEnded: boolean, isPlaying: boolean) {
+  if (isEnded) return <RotateCcw className="size-6" />;
+  else if (isPlaying) return <Pause className="size-6" />;
+  else if (!isPlaying) return <Play className="size-6" />;
+}
+
 export default function PlayerPlayButton() {
   const { isPlaying, play, pause, isEnded, isMouseActive } = use(PlayerContext);
-
-  function getPlayOption() {
-    if (isEnded) return <RotateCcw className="size-6" />;
-    else if (isPlaying) return <Pause className="size-6" />;
-    else if (!isPlaying) return <Play className="size-6" />;
-  }
 
   return (
     <div className="absolute top-1/2 left-1/2 z-30 -translate-y-1/2 -translate-x-1/2 flex gap-6">
@@ -23,7 +23,6 @@ export default function PlayerPlayButton() {
             "pointer-events-none !opacity-0": !isEnded,
           },
         )}
-        onClick={() => (isPlaying ? pause() : play())}
       >
         <SkipBack className="size-6" />
       </button>
@@ -37,7 +36,7 @@ export default function PlayerPlayButton() {
         )}
         onClick={() => (isPlaying ? pause() : play())}
       >
-        {getPlayOption()}
+        {getPlayOption(isEnded, isPlaying)}
       </button>
       <button
         className={cn(
@@ -48,7 +47,6 @@ export default function PlayerPlayButton() {
             "pointer-events-none !opacity-0": !isEnded,
           },
         )}
-        onClick={() => (isPlaying ? pause() : play())}
       >
         <SkipForward className="size-6" />
       </button>

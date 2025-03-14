@@ -18,14 +18,17 @@
     }
 }
 
-.animate-fade-out {
+.animate-fade-out .player-top-bar,
+.animate-fade-out .player-bottom-bar {
     animation: fadeOut .5s forwards;
 }
 
-.animate-fade-in {
+.animate-fade-in .player-top-bar,
+.animate-fade-in .player-bottom-bar {
     animation: fadeIn .5s forwards;
 }
 
 .seek-bar-container {
     --seek-fill: 0;
+    --turtle-position: .5rem;
 }
