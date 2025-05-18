@@ -1,6 +1,6 @@
-import PlayerWrapper from "./PlayerWrapper.tsx";
-import Video from "./Video.tsx";
-import { PlayerContextProps } from "@context/PlayerContext.ts";
+import PlayerWrapper from "./components/PlayerWrapper.tsx";
+import Video from "./components/Video.tsx";
+import { PlayerContextProps } from "./context/PlayerContext.ts";
 
 export interface VideoPlayerProps {
   src: PlayerContextProps["src"];

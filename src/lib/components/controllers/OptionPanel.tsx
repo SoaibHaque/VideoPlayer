@@ -1,5 +1,5 @@
-import LeftOptionPanel from "@components/controllers/leftOptions/LeftOptionPanel.tsx";
-import RightOptionPanel from "@components/controllers/rightOptions/RightOptionPanel.tsx";
+import LeftOptionPanel from "./leftOptions";
+import RightOptionPanel from "./rightOptions";
 
 export default function OptionPanel() {
   return (

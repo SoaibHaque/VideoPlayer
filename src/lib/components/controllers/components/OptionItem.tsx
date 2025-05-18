@@ -1,11 +1,11 @@
-import { HTMLProps, ReactNode } from "react";
+import { HTMLProps,  SVGProps } from "react";
 
 export default function OptionItem({
   Icon,
   type = "button",
   ...props
 }: {
-  Icon: ReactNode;
+  Icon: React.ComponentType<SVGProps<SVGSVGElement>>;
 } & Omit<HTMLProps<HTMLButtonElement>, "type"> & {
     type?: "submit" | "reset" | "button";
   }) {
@@ -15,7 +15,7 @@ export default function OptionItem({
       type={type}
       {...props}
     >
-      {Icon}
+      <Icon className='size-3 md:size-4 lg:size-5' />
     </button>
   );
 }

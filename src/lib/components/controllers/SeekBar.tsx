@@ -1,13 +1,14 @@
-import { use, useLayoutEffect, useRef } from "react";
-import { PlayerContext } from "@context/PlayerContext.ts";
+import { use, useCallback, useLayoutEffect, useRef } from "react";
+import { usePlayerStore } from "@store/playerStore";
+import { PlayerContext } from "@context/PlayerContext";
 
 export default function SeekBar() {
   const { ref } = use(PlayerContext);
+  const isFullScreen = usePlayerStore((state) => state.isFullScreen);
   const seekBarRef = useRef<HTMLDivElement>(null);
   const seekBarContainerRef = useRef<HTMLDivElement>(null);
 
-  function updateSeekBar(e: Event) {
-    const { currentTime, duration } = (e?.target as HTMLVideoElement) ?? {};
+  function updateSeekBar(currentTime: number, duration: number) {
     const percentage = (currentTime / duration) * 100 || 0;
 
     if (seekBarContainerRef?.current && seekBarRef?.current) {
@@ -22,14 +23,24 @@ export default function SeekBar() {
     }
   }
 
+  const handleTimeupdate = useCallback(() => {
+    const video = ref.current;
+    if (!video) return;
+    const { currentTime, duration } = video;
+    updateSeekBar(currentTime, duration);
+  }, [ref]);
+
   useLayoutEffect(() => {
     const video = ref.current;
-    if (video) video.addEventListener("timeupdate", updateSeekBar);
+    if (video) {
+      video.addEventListener("timeupdate", handleTimeupdate);
+      handleTimeupdate();
+    }
 
     return () => {
-      if (video) video.removeEventListener("timeupdate", updateSeekBar);
+      if (video) video.removeEventListener("timeupdate", handleTimeupdate);
     };
-  }, [ref]);
+  }, [handleTimeupdate, isFullScreen, ref]);
 
   return (
     <div
@@ -42,7 +53,7 @@ export default function SeekBar() {
       >
         <div className="bg-red-800 h-full transition-all w-[var(--seek-fill)]"></div>
       </div>
-      <div className="size-4 rounded-full bg-red-800 absolute lef-0 transition-all translate-x-[calc(var(--turtle-position)-.5rem)] top-1/2 -translate-y-1/2"></div>
+      <div className="size-4 rounded-full bg-red-800 absolute left-0 transition-all translate-x-[calc(var(--turtle-position)-.5rem)] top-1/2 -translate-y-1/2"></div>
     </div>
   );
 }

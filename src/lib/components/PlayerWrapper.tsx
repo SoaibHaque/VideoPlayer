@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
-import { VideoPlayerProps } from "./VideoPlayer.tsx";
+import { VideoPlayerProps } from "../index.tsx";
+import PlayerProvider from "@providers/PlayerProvider.tsx";
 import PlayerTop from "./PlayerTop.tsx";
 import PlayerBottom from "./PlayerBottom.tsx";
 import PlayerTouchSection from "./PlayerTouchSection.tsx";
-import PlayerPlayButton from "./PlayerPlayButton.tsx";
-import PlayerProvider from "@providers/PlayerProvider.tsx";
+import PlayOptionPanel from "./controllers/playOptions";
 
 export default function PlayerWrapper({
   children,
@@ -16,7 +16,7 @@ export default function PlayerWrapper({
   return (
     <PlayerProvider src={src}>
       <PlayerTop />
-      <PlayerPlayButton />
+      <PlayOptionPanel />
       {children}
       <PlayerTouchSection />
       <PlayerBottom />

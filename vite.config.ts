@@ -8,11 +8,12 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@components": path.resolve(__dirname, "./src/components"),
-      "@utils": path.resolve(__dirname, "./utils"),
-      "@context": path.resolve(__dirname, "./context"),
-      "@providers": path.resolve(__dirname, "./providers"),
-      "@hooks": path.resolve(__dirname, "./hooks"),
+      "@components": path.resolve(__dirname, "./src/lib/components"),
+      "@utils": path.resolve(__dirname, "./src/lib/utils"),
+      "@context": path.resolve(__dirname, "./src/lib/context"),
+      "@providers": path.resolve(__dirname, "./src/lib/providers"),
+      "@hooks": path.resolve(__dirname, "./src/lib/hooks"),
+      "@store": path.resolve(__dirname, "./src/lib/store"),
       "@public": path.resolve(__dirname, "./public"),
     },
   },

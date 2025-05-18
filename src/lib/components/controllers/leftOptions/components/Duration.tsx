@@ -1,5 +1,5 @@
 import { use } from "react";
-import { PlayerContext } from "@context/PlayerContext.ts";
+import { PlayerContext } from "@context/PlayerContext";
 
 export default function Duration() {
   const { ref } = use(PlayerContext);

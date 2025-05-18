@@ -27,19 +27,22 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": [
-        "src/components/*"
+        "src/lib/components/*"
       ],
       "@utils/*": [
-        "utils/*"
+        "src/lib/utils/*"
       ],
       "@context/*": [
-        "context/*"
+        "src/lib/context/*"
       ],
       "@providers/*": [
-        "providers/*"
+        "src/lib/providers/*"
       ],
       "@hooks/*": [
-        "hooks/*"
+        "src/lib/hooks/*"
+      ],
+      "@store/*": [
+        "src/lib/store/*"
       ],
       "@public/*": [
         "public/*"
